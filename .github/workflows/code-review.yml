@@ -1,0 +1,29 @@
+name: Dart Manual Code Review
+
+on:
+  workflow_dispatch:  # Elle başlatmak için bu satır şart
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Analyze code
+        run: dart analyze > dart_analyze_report.txt
+
+      - name: Run tests
+        run: dart test --reporter=compact > dart_test_report.txt
+
+      - name: Show Analyze Report
+        run: cat dart_analyze_report.txt
+
+      - name: Show Test Report
+        run: cat dart_test_report.txt
