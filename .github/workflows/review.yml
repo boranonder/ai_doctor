@@ -1,0 +1,19 @@
+name: Manual Smart Code Review
+
+on:
+  workflow_dispatch:  # Sadece elle başlatmak için
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Run custom code review
+        run: python3 review_helper.py
